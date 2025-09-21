@@ -17,69 +17,80 @@ try:
     # Crear tablas de dimensión
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS dim_estudiante (
-        ID_Estudiante INT AUTO_INCREMENT PRIMARY KEY,
-        Nombre_Completo VARCHAR(100) NOT NULL,
-        Cedula VARCHAR(20) UNIQUE,
-        Genero VARCHAR(10),
-        Estrato_economico INT,
-        Fecha_Nacimiento DATE
+        id_estudiante INT AUTO_INCREMENT PRIMARY KEY,
+        nombre_completo VARCHAR(100) NOT NULL,
+        cedula VARCHAR(20) UNIQUE,
+        genero VARCHAR(10),
+        estrato_economico INT,
+        fecha_nacimiento DATE
     );
     """)
 
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS dim_carrera (
-        ID_Carrera INT AUTO_INCREMENT PRIMARY KEY,
-        Nombre_Carrera VARCHAR(100) NOT NULL,
-        Facultad VARCHAR(100),
-        Jornada_Programa VARCHAR(50)
+        id_carrera INT AUTO_INCREMENT PRIMARY KEY,
+        nombre_carrera VARCHAR(100) NOT NULL,
+        facultad VARCHAR(100),
+        jornada_programa VARCHAR(50)
     );
     """)
 
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS dim_sede (
-        ID_Sede INT AUTO_INCREMENT PRIMARY KEY,
-        Nombre_Sede VARCHAR(100) NOT NULL,
-        Ciudad VARCHAR(100),
-        Direccion VARCHAR(200)
+        id_sede INT AUTO_INCREMENT PRIMARY KEY,
+        nombre_sede VARCHAR(100) NOT NULL,
+        ciudad VARCHAR(100),
+        direccion VARCHAR(200)
     );
     """)
 
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS dim_materia (
-        ID_Materia INT AUTO_INCREMENT PRIMARY KEY,
-        Nombre_Materia VARCHAR(100) NOT NULL,
-        Codigo_Materia VARCHAR(20) UNIQUE,
-        Numero_creditos INT
+        id_materia INT AUTO_INCREMENT PRIMARY KEY,
+        nombre_materia VARCHAR(100) NOT NULL,
+        codigo_materia VARCHAR(20) UNIQUE,
+        numero_creditos INT
     );
     """)
 
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS dim_periodo (
-        ID_Periodo INT AUTO_INCREMENT PRIMARY KEY,
-        Codigo VARCHAR(20) UNIQUE,
-        Año INT,
-        Mes_inicio INT,
-        Mes_fin INT
+        id_periodo INT AUTO_INCREMENT PRIMARY KEY,
+        codigo VARCHAR(20) UNIQUE,
+        anio INT,
+        mes_inicio INT,
+        mes_fin INT
+    );
+    """)
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS dim_becas (
+        id_beca INT AUTO_INCREMENT PRIMARY KEY,
+        nombre_beca VARCHAR(100) NOT NULL,
+        tipo_beca VARCHAR(50),
+        monto_mensual DECIMAL(10,2)
     );
     """)
 
     # Crear tabla de hechos
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS rendimiento_academico (
-        ID_Estudiante INT,
-        ID_Materia INT,
-        ID_Carrera INT,
-        ID_Periodo INT,
-        ID_Sede INT,
-        Nota_Final DECIMAL(5,2),
-        Aprobado BOOLEAN,
-        Veces_Cursada INT,
-        Jornada VARCHAR(50),
-        FOREIGN KEY (ID_Estudiante) REFERENCES dim_estudiante(ID_Estudiante),
-        FOREIGN KEY (ID_Materia) REFERENCES dim_materia(ID_Materia),
-        FOREIGN KEY (ID_Carrera) REFERENCES dim_carrera(ID_Carrera),
-        FOREIGN KEY (ID_Periodo) REFERENCES dim_periodo(ID_Periodo),
-        FOREIGN KEY (ID_Sede) REFERENCES dim_sede(ID_Sede)
+        id_estudiante INT,
+        id_materia INT,
+        id_carrera INT,
+        id_periodo INT,
+        id_sede INT,
+        id_beca INT,
+        nota_final DECIMAL(5,2),
+        aprobado BOOLEAN,
+        veces_cursada INT,
+        jornada VARCHAR(50),
+        FOREIGN KEY (id_estudiante) REFERENCES dim_estudiante(id_estudiante),
+        FOREIGN KEY (id_materia) REFERENCES dim_materia(id_materia),
+        FOREIGN KEY (id_carrera) REFERENCES dim_carrera(id_carrera),
+        FOREIGN KEY (id_periodo) REFERENCES dim_periodo(id_periodo),
+        FOREIGN KEY (id_sede) REFERENCES dim_sede(id_sede),
+        FOREIGN KEY (id_beca) REFERENCES dim_becas(id_beca)
     );
     """)
 

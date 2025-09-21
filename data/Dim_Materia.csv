@@ -1,6 +1,16 @@
-ID_Materia,Nombre_Materia,Codigo_Materia,Numero_creditos
+id_materia,nombre_materia,codigo_materia,numero_creditos
 1,Matemáticas I,MAT101,3
 2,Programación Básica,SIS102,4
 3,Contabilidad,ADM103,3
 4,Derecho Civil,DER104,2
 5,Psicología General,PSI105,3
+6,Cálculo Diferencial,MAT201,4
+7,Estructuras de Datos,SIS202,3
+8,Microeconomía,ECO203,3
+9,Derecho Penal,DER204,3
+10,Anatomía Humana,MED205,4
+11,Arquitectura de Software,SIS301,3
+12,Finanzas Corporativas,ADM302,3
+13,Educación Física,EDU303,2
+14,Ingeniería Estructural,CIV304,4
+15,Enfermería Clínica,ENF305,3

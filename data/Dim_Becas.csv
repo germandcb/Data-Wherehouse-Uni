@@ -1,0 +1,11 @@
+id_beca,nombre_beca,tipo_beca,monto_mensual
+1,Beca Excelencia Académica,Merito,500000.00
+2,Beca Deportiva,Deportiva,300000.00
+3,Beca Socioeconómica,Económica,400000.00
+4,Beca Investigación,Investigación,600000.00
+5,Beca Cultural,Cultural,250000.00
+6,Beca Transporte,Transporte,200000.00
+7,Beca Alimentación,Alimentación,350000.00
+8,Beca Residencia,Residencia,450000.00
+9,Beca Discapacidad,Discapacidad,550000.00
+10,Beca Extranjeros,Internacional,700000.00

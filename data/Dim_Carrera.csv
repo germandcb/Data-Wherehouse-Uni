@@ -1,5 +1,11 @@
-ID_Carrera,Nombre_Carrera,Facultad,Jornada_Programa
+id_carrera,nombre_carrera,facultad,jornada_programa
 1,Ingeniería de Sistemas,Ingeniería,Diurna
 2,Administración de Empresas,Ciencias Económicas,Nocturna
 3,Psicología,Ciencias Humanas,Diurna
 4,Derecho,Ciencias Jurídicas,Nocturna
+5,Medicina,Ciencias de la Salud,Diurna
+6,Arquitectura,Ingeniería,Diurna
+7,Contaduría Pública,Ciencias Económicas,Nocturna
+8,Educación,Ciencias Humanas,Diurna
+9,Ingeniería Civil,Ingeniería,Diurna
+10,Enfermería,Ciencias de la Salud,Nocturna

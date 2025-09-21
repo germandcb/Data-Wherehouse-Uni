@@ -1,4 +1,7 @@
-ID_Sede,Nombre_Sede,Ciudad,Direccion
+id_sede,nombre_sede,ciudad,direccion
 1,Sede Eso Tilin,Bogotá,Calle 123 #45-67
 2,Sede Alv Tilin,Medellín,Carrera 10 #20-30
 3,Sede Baila Tilin,Cali,Avenida Siempre Viva 742
+4,Sede Norte,Barranquilla,Calle 50 #30-40
+5,Sede Sur,Pereira,Carrera 5 #15-25
+6,Sede Centro,Bucaramanga,Avenida 27 #12-34

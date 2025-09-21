@@ -21,8 +21,8 @@ try:
 
     for _, fila in df.iterrows():
         cursor.execute("""
-            INSERT INTO dim_estudiante
-            (ID_Estudiante, Nombre_Completo, Cedula, Genero, Estrato_economico, Fecha_Nacimiento)
+            INSERT IGNORE INTO dim_estudiante
+            (id_estudiante, nombre_completo, cedula, genero, estrato_economico, fecha_nacimiento)
             VALUES (%s,%s,%s,%s,%s,%s)
         """, tuple(fila))
     print("Datos de estudiantes cargados")
@@ -37,7 +37,7 @@ try:
     for _, fila in df.iterrows():
         cursor.execute("""
             INSERT INTO dim_sede
-            (ID_Sede, Nombre_Sede, Ciudad, Direccion)
+            (id_sede, nombre_sede, ciudad, direccion)
             VALUES (%s,%s,%s,%s)
         """, tuple(fila))
     print("Datos de sedes cargados")
@@ -52,7 +52,7 @@ try:
     for _, fila in df.iterrows():
         cursor.execute("""
             INSERT INTO dim_carrera
-            (ID_Carrera, Nombre_Carrera, Facultad, Jornada_Programa)
+            (id_carrera, nombre_carrera, facultad, jornada_programa)
             VALUES (%s,%s,%s,%s)
         """, tuple(fila))
     print("Datos de carreras cargados")
@@ -67,7 +67,7 @@ try:
     for _, fila in df.iterrows():
         cursor.execute("""
             INSERT INTO dim_materia
-            (ID_Materia, Nombre_Materia, Codigo_Materia, Numero_Creditos)
+            (id_materia, nombre_materia, codigo_materia, numero_creditos)
             VALUES (%s,%s,%s,%s)
         """, tuple(fila))
     print("Datos de materias cargados")
@@ -82,10 +82,25 @@ try:
     for _, fila in df.iterrows():
         cursor.execute("""
             INSERT INTO dim_periodo
-            (ID_Periodo, Codigo, Año, Mes_inicio,Mes_fin)
+            (id_periodo, codigo, anio, mes_inicio, mes_fin)
             VALUES (%s,%s,%s,%s,%s)
         """, tuple(fila))
     print("Datos de periodos cargados")
+
+    #Datos de becas
+    csv_path = "../data/Dim_Becas.csv"
+    if not os.path.exists(csv_path):
+        raise FileNotFoundError(f"Archivo no encontrado: {csv_path}")
+
+    df = pd.read_csv(csv_path)
+
+    for _, fila in df.iterrows():
+        cursor.execute("""
+            INSERT INTO dim_becas
+            (id_beca, nombre_beca, tipo_beca, monto_mensual)
+            VALUES (%s,%s,%s,%s)
+        """, tuple(fila))
+    print("Datos de becas cargados")
 
     # Datos de la tabla de hechos
     if not os.path.exists(excel_path):
@@ -96,8 +111,8 @@ try:
     for _, fila in df.iterrows():
         cursor.execute("""
             INSERT INTO rendimiento_academico
-            (ID_Estudiante, ID_Materia, ID_Carrera, ID_Periodo, ID_Sede, Nota_Final, Aprobado, Veces_Cursada, Jornada)
-            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)
+            (id_estudiante, id_materia, id_carrera, id_periodo, id_sede, id_beca, nota_final, aprobado, veces_cursada, jornada)
+            VALUES (%s,%s,%s,%s,%s,NULL,%s,%s,%s,%s)
         """, tuple(fila))
     print("Datos de rendimiento academico cargados")
 
