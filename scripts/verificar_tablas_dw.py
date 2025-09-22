@@ -11,7 +11,7 @@ try:
     cursor = conexion.cursor()
 
     # Verificar tablas
-    tablas = ["dim_estudiante", "dim_sede", "dim_carrera", "dim_materia", "dim_periodo", "dim_becas", "rendimiento_academico"]
+    tablas = ["dim_estudiante", "dim_sede", "dim_carrera", "dim_materia", "dim_periodo", "rendimiento_academico"]
     for tabla in tablas:
         try:
             cursor.execute(f"SELECT COUNT(*) FROM {tabla}")

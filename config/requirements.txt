@@ -1,6 +1,3 @@
 pandas
 mysql-connector-python
 openpyxl
-datetime
-logging
-os

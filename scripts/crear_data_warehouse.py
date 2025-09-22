@@ -63,14 +63,6 @@ try:
     );
     """)
 
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS dim_becas (
-        id_beca INT AUTO_INCREMENT PRIMARY KEY,
-        nombre_beca VARCHAR(100) NOT NULL,
-        tipo_beca VARCHAR(50),
-        monto_mensual DECIMAL(10,2)
-    );
-    """)
 
     # Crear tabla de hechos
     cursor.execute("""
@@ -80,7 +72,6 @@ try:
         id_carrera INT,
         id_periodo INT,
         id_sede INT,
-        id_beca INT,
         nota_final DECIMAL(5,2),
         aprobado BOOLEAN,
         veces_cursada INT,
@@ -89,8 +80,7 @@ try:
         FOREIGN KEY (id_materia) REFERENCES dim_materia(id_materia),
         FOREIGN KEY (id_carrera) REFERENCES dim_carrera(id_carrera),
         FOREIGN KEY (id_periodo) REFERENCES dim_periodo(id_periodo),
-        FOREIGN KEY (id_sede) REFERENCES dim_sede(id_sede),
-        FOREIGN KEY (id_beca) REFERENCES dim_becas(id_beca)
+        FOREIGN KEY (id_sede) REFERENCES dim_sede(id_sede)
     );
     """)
 

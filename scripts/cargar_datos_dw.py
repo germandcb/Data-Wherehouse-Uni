@@ -65,6 +65,13 @@ def insertar_estudiantes(cursor, df):
         logging.error(f"Error en inserción de estudiantes: {e}")
         raise
 
+def limpiar_datos_rendimiento_academico(df):
+    logging.info(f"Iniciando limpieza de {len(df)} registros de rendimiento académico")
+    # Limpiar columna 'Jornada': reemplazar valores vacíos, nulos o espacios en blanco con "No especificado"
+    df['Jornada'] = df['Jornada'].fillna("No especificado").replace(r'^\s*$', "No especificado", regex=True)
+    logging.info(f"Limpieza de Jornada completada: {len(df)} registros")
+    return df
+
 try:
     # === Configuración conexión MySQL ===
     conexion = mysql.connector.connect(
@@ -117,7 +124,7 @@ try:
     for _, fila in df.iterrows():
         cursor.execute("""
             INSERT INTO dim_carrera
-            (id_carrera, nombre_carrera, facultad, jornada_programa)
+            (id_carrera, nombre_carrera, facultad, Jornada_programa)
             VALUES (%s,%s,%s,%s)
         """, tuple(fila))
     print("Datos de carreras cargados")
@@ -152,20 +159,6 @@ try:
         """, tuple(fila))
     print("Datos de periodos cargados")
 
-    #Datos de becas
-    csv_path = "data/Dim_Becas.csv"
-    if not os.path.exists(csv_path):
-        raise FileNotFoundError(f"Archivo no encontrado: {csv_path}")
-
-    df = pd.read_csv(csv_path)
-
-    for _, fila in df.iterrows():
-        cursor.execute("""
-            INSERT INTO dim_becas
-            (id_beca, nombre_beca, tipo_beca, monto_mensual)
-            VALUES (%s,%s,%s,%s)
-        """, tuple(fila))
-    print("Datos de becas cargados")
 
     # Datos de la tabla de hechos
     csv_path = "data/Rendimiento_Academico.csv"
@@ -179,11 +172,14 @@ try:
     df = df[df['ID_Estudiante'].isin(ids_estudiantes_validos)]
     logging.info(f"Después de filtrar por estudiantes válidos: {len(df)} registros")
 
+    # Limpiar datos de rendimiento académico
+    df = limpiar_datos_rendimiento_academico(df)
+
     for _, fila in df.iterrows():
         cursor.execute("""
             INSERT INTO rendimiento_academico
-            (id_estudiante, id_materia, id_carrera, id_periodo, id_sede, id_beca, nota_final, aprobado, veces_cursada, jornada)
-            VALUES (%s,%s,%s,%s,%s,NULL,%s,%s,%s,%s)
+            (id_estudiante, id_materia, id_carrera, id_periodo, id_sede, nota_final, aprobado, veces_cursada, Jornada)
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)
         """, tuple(fila))
     logging.info("Datos de rendimiento académico cargados")
     print("Datos de rendimiento academico cargados")
